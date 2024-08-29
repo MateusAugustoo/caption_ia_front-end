@@ -1,11 +1,14 @@
 import { SubmitHandler, useForm, FormProvider } from "react-hook-form"
-import { VideoInput } from "./components/InputVideo"
+import { VideoInput } from "./components/input/InputVideo"
 import { TFormValue } from "./type/TFormValue"
 import { SelectedCaption } from "./components/SelectedCaption"
 import { HeaderComp } from "./components/Header"
-import axios from "axios"
+import axios, { AxiosError } from "axios"
+import { useState } from "react"
+
 function App() {
   const methods = useForm<TFormValue>()
+  const [ isNotifyError, setIsNotifyError ] = useState<string>()
 
   const onSubmit: SubmitHandler<TFormValue> = async (data) => {
     try {
@@ -19,10 +22,13 @@ function App() {
           'Content-Type': 'multipart/form-data',
         }
       })
-
-      console.log(res.data)
+      console.log(res)
     } catch (error) {
-      console.error(error)
+      if(error instanceof AxiosError){
+        if(error.response?.status === 400 && error.response!){
+          setIsNotifyError(error.response.data.message)
+        }
+      }
     }
   }
 
@@ -40,8 +46,9 @@ function App() {
               name="video"
               required
             />
+            { isNotifyError && <p>{isNotifyError}</p>}
             <SelectedCaption
-              label="Escolha uma lingua:"
+              label="Select a language:"
               name="caption"
               required
               options={[
@@ -53,7 +60,7 @@ function App() {
                 {
                   icon: "🇬🇧",
                   value: "en-US",
-                  label: "Inglês"
+                  label: "English"
                 },
                 {
                   icon: "🇪🇸",
@@ -67,7 +74,7 @@ function App() {
               type="submit"
               className="bg-lime-400 text-black font-bold py-2 px-4 rounded"
             >
-              Legendar
+              Subtitle
             </button>
           </form>
         </FormProvider>
