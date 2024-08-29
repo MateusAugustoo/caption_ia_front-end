@@ -55,7 +55,7 @@ function App() {
                 {
                   icon: "🇧🇷",
                   value: "pt-BR",
-                  label: "Português"
+                  label: "Portuguese"
                 },
                 {
                   icon: "🇬🇧",
