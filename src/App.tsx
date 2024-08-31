@@ -5,10 +5,11 @@ import { SelectedCaption } from "./components/SelectedCaption"
 import { HeaderComp } from "./components/Header"
 import axios, { AxiosError } from "axios"
 import { useState } from "react"
+import { X } from "lucide-react"
 
 function App() {
   const methods = useForm<TFormValue>()
-  const [ isNotifyError, setIsNotifyError ] = useState<string>()
+  const [isNotifyError, setIsNotifyError] = useState<string>()
 
   const onSubmit: SubmitHandler<TFormValue> = async (data) => {
     try {
@@ -24,9 +25,10 @@ function App() {
       })
       console.log(res)
     } catch (error) {
-      if(error instanceof AxiosError){
-        if(error.response?.status === 400 && error.response!){
-          setIsNotifyError(error.response.data.message)
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 400 && error.response!) {
+          setIsNotifyError(error.response.data)
+          console.log(error.response.data)
         }
       }
     }
@@ -46,7 +48,10 @@ function App() {
               name="video"
               required
             />
-            { isNotifyError && <p>{isNotifyError}</p>}
+            {isNotifyError && 
+              <p className="font-light italic text-sm text-red-500 flex items-center gap-2">
+                <X  size={16}/><span>{isNotifyError}</span>
+              </p>}
             <SelectedCaption
               label="Select a language:"
               name="caption"
