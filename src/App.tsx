@@ -59,17 +59,17 @@ function App() {
               options={[
                 {
                   icon: "🇧🇷",
-                  value: "pt-BR",
+                  value: "pt",
                   label: "Portuguese"
                 },
                 {
                   icon: "🇬🇧",
-                  value: "en-US",
+                  value: "en",
                   label: "English"
                 },
                 {
                   icon: "🇪🇸",
-                  value: "es-ES",
+                  value: "es",
                   label: "Español"
                 }
               ]}
