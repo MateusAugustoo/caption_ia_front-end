@@ -6,6 +6,7 @@ import { HeaderComp } from "./components/Header"
 import axios, { AxiosError } from "axios"
 import { useState } from "react"
 import { X } from "lucide-react"
+import { SelectedColorCaption } from "./components/SelectedColorCaption"
 
 function App() {
   const methods = useForm<TFormValue>()
@@ -74,6 +75,31 @@ function App() {
                 }
               ]}
             />
+
+            <div>
+              <SelectedColorCaption 
+                label="Select a color:"
+                name="colorCaption"
+                required
+                options={[
+                  {
+                    text: "White",
+                    value: "white",
+                    style: 'text-white'
+                  },
+                  {
+                    text: "Black",
+                    value: "black",
+                    style: 'text-white'
+                  },
+                  {
+                    text: "Yellow",
+                    value: "yellow",
+                    style: 'text-yellow-400'
+                  },
+                ]}
+              />
+            </div>
 
             <button
               type="submit"
