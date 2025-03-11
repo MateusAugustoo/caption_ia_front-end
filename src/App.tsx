@@ -6,7 +6,7 @@ import { HeaderComp } from "./components/Header"
 import axios, { AxiosError } from "axios"
 import { useState } from "react"
 import { X } from "lucide-react"
-import { SelectedColorCaption } from "./components/SelectedColorCaption"
+// import { SelectedColorCaption } from "./components/SelectedColorCaption"
 
 function App() {
   const methods = useForm<TFormValue>()
@@ -18,6 +18,7 @@ function App() {
 
       formData.append('video', data.video)
       formData.append('caption', data.caption)
+      // formData.append('colorCaption', data.colorCaption)
 
       const res = await axios.post('http://localhost:3000/api/upload', formData, {
         headers: {
@@ -76,7 +77,7 @@ function App() {
               ]}
             />
 
-            <div>
+            {/* <div>
               <SelectedColorCaption 
                 label="Select a color:"
                 name="colorCaption"
@@ -88,9 +89,9 @@ function App() {
                     style: 'text-white'
                   },
                   {
-                    text: "Black",
-                    value: "black",
-                    style: 'text-white'
+                    text: "Red",
+                    value: "red",
+                    style: 'text-red-400'
                   },
                   {
                     text: "Yellow",
@@ -99,7 +100,7 @@ function App() {
                   },
                 ]}
               />
-            </div>
+            </div> */}
 
             <button
               type="submit"
