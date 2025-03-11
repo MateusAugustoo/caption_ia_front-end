@@ -1,4 +1,5 @@
 export type TFormValue = {
   video: File
-  caption: string
+  caption: string,
+  colorCaption: string,
 }
